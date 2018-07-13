@@ -885,7 +885,6 @@
                                                                     dataType: 'json'
                                                                 })
                                                                 .done(function(d) {
-                                                                    console.log(d);
                                                                     if(d.message == 'time_no_valid'){
                                                                         CheckTimeValid = false;
                                                                     }else{
@@ -933,7 +932,6 @@
                                                                         });
                                                                         Js_Top.hide_loading();
                                                                     }else{
-                                                                        console.log('vao day');
                                                                         if(ChkNextStep){
                                                                             Customer_Edit.PrivateUpdateEvent(customer_id,service_id,ChangeDateService,eventAfterDate,eventAfterTime);    
                                                                             self.close();

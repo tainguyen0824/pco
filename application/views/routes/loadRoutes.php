@@ -217,15 +217,15 @@
 	    DrawMap: function (arr_service, arr_zone) {
 	    	Route_Active.LoadMap();
 	    	for(var i in arr_service){
-		       	var overlay = new google.maps.Marker({
-					position: {lat: parseFloat(arr_service[i].lat), lng: parseFloat(arr_service[i].lng)},
-					icon: image,
-					title: arr_service[i].service_id,
-					map: Route_Active.settings.Map
-					// title: arr_service[i].route_id
-				});
-				// Route_Active.settings.Map.setCenter(overlay.position);
-			    // console.log('2' + l);
+	    	    if(arr_service[i].lat != 0 && arr_service[i].lng != 0){
+                    var overlay = new google.maps.Marker({
+                        position: {lat: parseFloat(arr_service[i].lat), lng: parseFloat(arr_service[i].lng)},
+                        icon: image,
+                        title: arr_service[i].service_id,
+                        map: Route_Active.settings.Map
+                        // title: arr_service[i].route_id
+                    });
+                }
 	    	}
 	  		for(var i in arr_zone){
 	  			var type = arr_zone[i].type;

@@ -88,12 +88,14 @@
 
                 for(var i in service){
                     arr_service.push({lat: service[i].latitude_1, lng: service[i].longitude_1,service_id: service[i].service_id});
-                    var overlay = new google.maps.Marker({
-                        position: {lat: parseFloat(service[i].latitude_1), lng: parseFloat(service[i].longitude_1)},
-                        icon: image,
-                        title: service[i].service_id
-                    });
-                    overlay.setMap(map);
+                    if(service[i].latitude_1 != 0 && service[i].longitude_1 != 0){
+                        var overlay = new google.maps.Marker({
+                            position: {lat: parseFloat(service[i].latitude_1), lng: parseFloat(service[i].longitude_1)},
+                            icon: image,
+                            title: service[i].service_id
+                        });
+                        overlay.setMap(map);
+                    }
                 }
                 for(var i in zone){
                     saveData.push({index: zone[i].map_id, type: zone[i].type.toUpperCase(), position: zone[i].position, service_in: zone[i].service_in});
