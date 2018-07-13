@@ -434,35 +434,37 @@ class Customers_Controller extends Template_Controller {
                 // ********** SAVE CONTACT
                 if (isset($_POST['index_contact']) && !empty($_POST['index_contact'])):
                     foreach ($_POST['index_contact'] as $index):
-                        $ArrSaveContact = array(
-                            'Customer_id' => $customers_id,
-                            'Contact_index' => $index,
-                            'Contact_contact_name' => $this->input->post('contact_name_' . $index),
-                            'Contact_contact_atn' => $this->input->post('contact_attn_' . $index),
-                            'Contact_contact_address_1' => $this->input->post('contact_address_1_' . $index),
-                            'Contact_contact_address_2' => $this->input->post('contact_address_2_' . $index),
-                            'Contact_contact_city' => $this->input->post('contact_city_' . $index),
-                            'Contact_contact_state' => $this->input->post('contact_state_' . $index),
-                            'Contact_contact_zip' => $this->input->post('contact_zip_' . $index),
-                            'Contact_contact_county' => $this->input->post('contact_county_' . $index),
-                            'Contact_contact_email' => $this->input->post('contact_email_' . $index),
-                            'Contact_contact_chk_contact' => $this->input->post('contact_invoice_email_' . $index),
-                            'Contact_contact_chk_preferences' => $this->input->post('contact_work_order_email_' . $index),
-                            'Contact_contact_website' => $this->input->post('contact_websites_' . $index),
-                            'Contact_contact_notes' => $this->input->post('contact_notes_' . $index),
-                            // phone
-                            'Contact_phone_number' => $this->input->post('contact_phone_number_' . $index),
-                            'Contact_phone_ext' => $this->input->post('contact_phone_ext_' . $index),
-                            'Contact_phone_type' => $this->input->post('contact_phone_type_' . $index),
-                            'Contact_phone_index' => $this->input->post('index_phone_contact_' . $index),
-                            // end phone
-                        );
-                        $contact_id = $this->InitService->SaveContact($ArrSaveContact, 'add');
+                        if($this->input->post('contact_name_'.$index) != ''):
+                            $ArrSaveContact = array(
+                                'Customer_id' => $customers_id,
+                                'Contact_index' => $index,
+                                'Contact_contact_name' => $this->input->post('contact_name_' . $index),
+                                'Contact_contact_atn' => $this->input->post('contact_attn_' . $index),
+                                'Contact_contact_address_1' => $this->input->post('contact_address_1_' . $index),
+                                'Contact_contact_address_2' => $this->input->post('contact_address_2_' . $index),
+                                'Contact_contact_city' => $this->input->post('contact_city_' . $index),
+                                'Contact_contact_state' => $this->input->post('contact_state_' . $index),
+                                'Contact_contact_zip' => $this->input->post('contact_zip_' . $index),
+                                'Contact_contact_county' => $this->input->post('contact_county_' . $index),
+                                'Contact_contact_email' => $this->input->post('contact_email_' . $index),
+                                'Contact_contact_chk_contact' => $this->input->post('contact_invoice_email_' . $index),
+                                'Contact_contact_chk_preferences' => $this->input->post('contact_work_order_email_' . $index),
+                                'Contact_contact_website' => $this->input->post('contact_websites_' . $index),
+                                'Contact_contact_notes' => $this->input->post('contact_notes_' . $index),
+                                // phone
+                                'Contact_phone_number' => $this->input->post('contact_phone_number_' . $index),
+                                'Contact_phone_ext' => $this->input->post('contact_phone_ext_' . $index),
+                                'Contact_phone_type' => $this->input->post('contact_phone_type_' . $index),
+                                'Contact_phone_index' => $this->input->post('index_phone_contact_' . $index),
+                                // end phone
+                            );
+                            $contact_id = $this->InitService->SaveContact($ArrSaveContact, 'add');
 
-                        $ArrStrSearchContact = array('Contact_contact_name', 'Contact_contact_atn', 'Contact_contact_address_1', 'Contact_contact_address_2', 'Contact_contact_city', 'Contact_contact_state', 'Contact_contact_zip', 'Contact_contact_county', 'Contact_contact_email', 'Contact_contact_website', 'Contact_contact_notes');
-                        foreach ($ArrStrSearchContact as $name):
-                            $Str_search_contacts .= !empty($ArrSaveContact[$name]) ? $ArrSaveContact[$name] . ' ' : '';
-                        endforeach;
+                            $ArrStrSearchContact = array('Contact_contact_name', 'Contact_contact_atn', 'Contact_contact_address_1', 'Contact_contact_address_2', 'Contact_contact_city', 'Contact_contact_state', 'Contact_contact_zip', 'Contact_contact_county', 'Contact_contact_email', 'Contact_contact_website', 'Contact_contact_notes');
+                            foreach ($ArrStrSearchContact as $name):
+                                $Str_search_contacts .= !empty($ArrSaveContact[$name]) ? $ArrSaveContact[$name] . ' ' : '';
+                            endforeach;
+                        endif;
 
                     endforeach;
                     $this->db->where('id', $customers_id);
@@ -809,39 +811,41 @@ class Customers_Controller extends Template_Controller {
 				$Arr_Remove_Contact = $this->db->get('customers_contact')->result_array(false);
 
 				foreach ($_POST['index_contact'] as $index):
+                    if($this->input->post('contact_name_'.$index) != ''):
 
-					$ArrSaveContact = array(
-						'Customer_id'                     => $idOradd,
-						'Contact_index'                   => $index,
-						'Contact_contact_name'            => $this->input->post('contact_name_'.$index),
-						'Contact_contact_atn'             => $this->input->post('contact_attn_'.$index),
-						'Contact_contact_address_1'       => $this->input->post('contact_address_1_'.$index),
-						'Contact_contact_address_2'       => $this->input->post('contact_address_2_'.$index),
-						'Contact_contact_city'            => $this->input->post('contact_city_'.$index),
-						'Contact_contact_state'           => $this->input->post('contact_state_'.$index),
-						'Contact_contact_zip'             => $this->input->post('contact_zip_'.$index),
-						'Contact_contact_county'          => $this->input->post('contact_county_'.$index),
-						'Contact_contact_email'           => $this->input->post('contact_email_'.$index),
-						'Contact_contact_chk_contact'     => $this->input->post('contact_invoice_email_'.$index),
-						'Contact_contact_chk_preferences' => $this->input->post('contact_work_order_email_'.$index),
-						'Contact_contact_website'         => $this->input->post('contact_websites_'.$index),
-						'Contact_contact_notes'           => $this->input->post('contact_notes_'.$index),
-						// phone
-						'Contact_phone_number'            => $this->input->post('contact_phone_number_'.$index),
-						'Contact_phone_ext'               => $this->input->post('contact_phone_ext_'.$index),
-						'Contact_phone_type'              => $this->input->post('contact_phone_type_'.$index),
-						'Contact_phone_index'             => $this->input->post('index_phone_contact_'.$index),
-						// end phone
-					);
-					$contact_id = $this->InitService->SaveContact($ArrSaveContact,$this->input->post('contact_id_'.$index));
-					if($this->input->post('contact_id_'.$index) != 'add'):
-						$Arr_Remove_Contact = $this->removeElementWithValue($Arr_Remove_Contact,'id',$this->input->post('contact_id_'.$index));
-					endif;
+                        $ArrSaveContact = array(
+                            'Customer_id'                     => $idOradd,
+                            'Contact_index'                   => $index,
+                            'Contact_contact_name'            => $this->input->post('contact_name_'.$index),
+                            'Contact_contact_atn'             => $this->input->post('contact_attn_'.$index),
+                            'Contact_contact_address_1'       => $this->input->post('contact_address_1_'.$index),
+                            'Contact_contact_address_2'       => $this->input->post('contact_address_2_'.$index),
+                            'Contact_contact_city'            => $this->input->post('contact_city_'.$index),
+                            'Contact_contact_state'           => $this->input->post('contact_state_'.$index),
+                            'Contact_contact_zip'             => $this->input->post('contact_zip_'.$index),
+                            'Contact_contact_county'          => $this->input->post('contact_county_'.$index),
+                            'Contact_contact_email'           => $this->input->post('contact_email_'.$index),
+                            'Contact_contact_chk_contact'     => $this->input->post('contact_invoice_email_'.$index),
+                            'Contact_contact_chk_preferences' => $this->input->post('contact_work_order_email_'.$index),
+                            'Contact_contact_website'         => $this->input->post('contact_websites_'.$index),
+                            'Contact_contact_notes'           => $this->input->post('contact_notes_'.$index),
+                            // phone
+                            'Contact_phone_number'            => $this->input->post('contact_phone_number_'.$index),
+                            'Contact_phone_ext'               => $this->input->post('contact_phone_ext_'.$index),
+                            'Contact_phone_type'              => $this->input->post('contact_phone_type_'.$index),
+                            'Contact_phone_index'             => $this->input->post('index_phone_contact_'.$index),
+                            // end phone
+                        );
+                        $contact_id = $this->InitService->SaveContact($ArrSaveContact,$this->input->post('contact_id_'.$index));
+                        if($this->input->post('contact_id_'.$index) != 'add'):
+                            $Arr_Remove_Contact = $this->removeElementWithValue($Arr_Remove_Contact,'id',$this->input->post('contact_id_'.$index));
+                        endif;
 
-					$ArrStrSearchContact = array('Contact_contact_name','Contact_contact_atn','Contact_contact_address_1','Contact_contact_address_2','Contact_contact_city','Contact_contact_state','Contact_contact_zip','Contact_contact_county','Contact_contact_email','Contact_contact_website','Contact_contact_notes');
-					foreach ($ArrStrSearchContact as $name):
-						$Str_search_contacts .= !empty($ArrSaveContact[$name])?$ArrSaveContact[$name].' ':'';
-					endforeach;
+                        $ArrStrSearchContact = array('Contact_contact_name','Contact_contact_atn','Contact_contact_address_1','Contact_contact_address_2','Contact_contact_city','Contact_contact_state','Contact_contact_zip','Contact_contact_county','Contact_contact_email','Contact_contact_website','Contact_contact_notes');
+                        foreach ($ArrStrSearchContact as $name):
+                            $Str_search_contacts .= !empty($ArrSaveContact[$name])?$ArrSaveContact[$name].' ':'';
+                        endforeach;
+                    endif;
 
 				endforeach;
 
@@ -1057,7 +1061,10 @@ class Customers_Controller extends Template_Controller {
 				$Sql_service_type = 'type = "Default" OR (member_id = '.$this->Member_id.' AND type = "Custom")';
 				$this->db->where($Sql_service_type);
 				$Service_type = $this->db->get('_service_type')->result_array(false);
-                $routes = $this->db->query('SELECT * FROM routes,set_route WHERE route_set = id AND (route_id = '.$Service[0]['service_route'].' OR active = 1) AND member_id = ' . $this->Member_id)->result_array(false);
+				if(!empty($Service[0]['service_route']))
+                    $routes = $this->db->query('SELECT * FROM routes,set_route WHERE route_set = id AND (route_id = '.$Service[0]['service_route'].' OR active = 1) AND member_id = ' . $this->Member_id)->result_array(false);
+				else
+                    $routes = $this->db->query('SELECT * FROM routes,set_route WHERE route_set = id AND active = 1 AND member_id = ' . $this->Member_id)->result_array(false);
 
 				$template->set(array(
 					'routes' => $routes,
