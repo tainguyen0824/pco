@@ -1,0 +1,30 @@
+<?php
+
+class Admin_contact_Controller extends Template_Controller {
+
+    public $template = 'admin/index';
+
+    public function __construct() {
+        parent::__construct();
+        $this->_get_session_msg();
+    }
+
+    private function _get_session_msg() {
+        if ($this->session->get('error_msg'))
+            $this->template->error_msg = $this->session->get('error_msg');
+        if ($this->session->get('warning_msg'))
+            $this->template->warning_msg = $this->session->get('warning_msg');
+        if ($this->session->get('success_msg'))
+            $this->template->success_msg = $this->session->get('success_msg');
+        if ($this->session->get('info_msg'))
+            $this->template->info_msg = $this->session->get('info_msg');
+    }
+
+    public function index() {
+        $this->template->content = new View('admin_contact/list');
+        $m_list = $this->db->get('contact')->result_array(false);
+        $this->template->content->m_list = $m_list;
+    }
+}
+
+?>
