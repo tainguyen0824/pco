@@ -287,10 +287,12 @@
 	    	}
 	    },
 	    Search: function(){
-		    Route_Active.LoadDefault();
-		    selected = [];
-		    unselected = [];
-		    textSelect.text(0);
+		    setTimeout(function () {
+                Route_Active.LoadDefault();
+                selected = [];
+                unselected = [];
+                textSelect.text(0);
+            },1000);
 	    },
 	    SaveRoute: function (t_this) {
 	    	var action = $(t_this).val();
@@ -460,7 +462,7 @@
 	//       zoom: 15
 	//     });
 	// }
-	// $(document).ready(function () {
-	// 	view_map();
-	// })
+	$(document).ready(function () {
+		Route_Active.init();
+	})
 </script>

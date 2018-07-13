@@ -57,9 +57,8 @@ class Routes_Controller extends Template_Controller
         $this->template = new View('routes/navSet');
         $this->template->jsLoad = new View('routes/loadRoutes');
         $this->template->set = $set;
-        $this->template->render = true;
+        $this->template->render(true);
 
-        echo $this->template;
         die();
     }
 
@@ -167,10 +166,10 @@ class Routes_Controller extends Template_Controller
     public function getNewSet()
     {
         $this->template = new View('routes/newSet');
-        $this->template->render = true;
         $this->template->jsLoad = new View('routes/loadRoutes');
         $this->template->idSet = $_POST['idSet'];
-        echo $this->template;
+        $this->template->render(true);
+
         die();
     }
 

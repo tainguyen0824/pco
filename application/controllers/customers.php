@@ -1057,7 +1057,7 @@ class Customers_Controller extends Template_Controller {
 				$Sql_service_type = 'type = "Default" OR (member_id = '.$this->Member_id.' AND type = "Custom")';
 				$this->db->where($Sql_service_type);
 				$Service_type = $this->db->get('_service_type')->result_array(false);
-                $routes = $this->db->query('SELECT * FROM routes,set_route WHERE route_set = id AND active = 1 AND member_id = ' . $this->Member_id)->result_array(false);
+                $routes = $this->db->query('SELECT * FROM routes,set_route WHERE route_set = id AND (route_id = '.$Service[0]['service_route'].' OR active = 1) AND member_id = ' . $this->Member_id)->result_array(false);
 
 				$template->set(array(
 					'routes' => $routes,
